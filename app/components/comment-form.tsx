@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import type { CommentActionState } from "@/app/actions";
 
@@ -32,19 +32,32 @@ export function CommentForm({
     formData: FormData,
   ) => Promise<CommentActionState>;
 }) {
-  const [state, formAction] = useActionState(action, initialState);
-  const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (state.status === "success") formRef.current?.reset();
-  }, [state]);
+  const [author, setAuthor] = useState("");
+  const [body, setBody] = useState("");
+  const [state, formAction] = useActionState(
+    async (previousState: CommentActionState, formData: FormData) => {
+      const result = await action(previousState, formData);
+      if (result.status === "success") {
+        setAuthor("");
+        setBody("");
+      }
+      return result;
+    },
+    initialState,
+  );
 
   return (
-    <form ref={formRef} action={formAction} className="flex flex-col gap-4">
+    <form action={formAction} className="flex flex-col gap-4">
       <input type="hidden" name="requestId" value={requestId} />
       <label className="flex flex-col gap-1">
         <span className="text-sm font-medium">Your name (optional)</span>
-        <input name="author" maxLength={80} className={field} />
+        <input
+          name="author"
+          maxLength={80}
+          value={author}
+          onChange={(event) => setAuthor(event.target.value)}
+          className={field}
+        />
       </label>
       <label className="flex flex-col gap-1">
         <span className="text-sm font-medium">Comment</span>
@@ -53,6 +66,8 @@ export function CommentForm({
           rows={4}
           maxLength={2000}
           required
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
           className={field}
         />
       </label>
