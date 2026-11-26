@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { integer, primaryKey, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const STATUSES = ["open", "planned", "shipped"] as const;
 export type Status = (typeof STATUSES)[number];
@@ -18,3 +18,14 @@ export const requests = sqliteTable("requests", {
 
 export type FeatureRequest = typeof requests.$inferSelect;
 export type NewFeatureRequest = typeof requests.$inferInsert;
+
+export const requestTags = sqliteTable(
+  "request_tags",
+  {
+    requestId: integer("request_id")
+      .notNull()
+      .references(() => requests.id, { onDelete: "cascade" }),
+    tag: text("tag").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.requestId, t.tag] })],
+);
