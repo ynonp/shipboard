@@ -1,10 +1,11 @@
 "use server";
 
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
-import { requests, STATUSES, type Status } from "@/db/schema";
+import { normalizeTag } from "@/db/tags";
+import { requests, requestTags, STATUSES, type Status } from "@/db/schema";
 
 export async function createRequest(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
@@ -36,5 +37,25 @@ export async function setStatus(formData: FormData) {
   const status = String(formData.get("status")) as Status;
   if (!STATUSES.includes(status)) throw new Error(`Invalid status: ${status}`);
   db.update(requests).set({ status }).where(eq(requests.id, id)).run();
+  revalidatePath("/", "layout");
+}
+
+export async function addTag(formData: FormData) {
+  const id = Number(formData.get("id"));
+  const tag = normalizeTag(String(formData.get("tag") ?? ""));
+  if (!tag) return;
+  db.insert(requestTags)
+    .values({ requestId: id, tag })
+    .onConflictDoNothing()
+    .run();
+  revalidatePath("/", "layout");
+}
+
+export async function removeTag(formData: FormData) {
+  const id = Number(formData.get("id"));
+  const tag = String(formData.get("tag") ?? "");
+  db.delete(requestTags)
+    .where(and(eq(requestTags.requestId, id), eq(requestTags.tag, tag)))
+    .run();
   revalidatePath("/", "layout");
 }
