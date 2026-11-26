@@ -31,3 +31,4 @@ The DB file defaults to `./shipboard.db`; override it with `DB_FILE_NAME`.
 - `app/actions.ts`: server actions `createRequest`, `upvote`, `setStatus`
 - `app/components/request-card.tsx`: the request card
 - Pages: `/` (list), `/requests/new`, `/requests/[id]`, `/roadmap`
+- `.github/agents/ui-expert.agent.md`: custom agent profile for UI/UX-focused work
