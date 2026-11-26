@@ -25,10 +25,10 @@ The DB file defaults to `./shipboard.db`; override it with `DB_FILE_NAME`.
 
 ## Layout
 
-- `db/schema.ts`: the `requests` table
+- `db/schema.ts`: the `requests` and `comments` tables
 - `db/queries.ts`: reads (call `connection()` so they run per request)
 - `db/seed.ts`: seed data
-- `app/actions.ts`: server actions `createRequest`, `upvote`, `setStatus`
+- `app/actions.ts`: server actions `createRequest`, `createComment`, `upvote`, `setStatus`
 - `app/components/request-card.tsx`: the request card
 - Pages: `/` (list), `/requests/new`, `/requests/[id]`, `/roadmap`
 - `.github/agents/ui-expert.agent.md`: custom agent profile for UI/UX-focused work

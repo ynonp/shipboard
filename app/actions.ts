@@ -4,7 +4,7 @@ import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
-import { requests, STATUSES, type Status } from "@/db/schema";
+import { comments, requests, STATUSES, type Status } from "@/db/schema";
 
 export async function createRequest(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
@@ -37,4 +37,24 @@ export async function setStatus(formData: FormData) {
   if (!STATUSES.includes(status)) throw new Error(`Invalid status: ${status}`);
   db.update(requests).set({ status }).where(eq(requests.id, id)).run();
   revalidatePath("/", "layout");
+}
+
+export async function createComment(formData: FormData) {
+  const requestId = Number(formData.get("requestId"));
+  const body = String(formData.get("body") ?? "").trim();
+  const author = String(formData.get("author") ?? "").trim() || "Anonymous";
+  if (!Number.isSafeInteger(requestId) || requestId < 1) {
+    throw new Error("Invalid request");
+  }
+  if (!body) throw new Error("Comment is required");
+
+  const request = db
+    .select({ id: requests.id })
+    .from(requests)
+    .where(eq(requests.id, requestId))
+    .get();
+  if (!request) throw new Error("Request not found");
+
+  db.insert(comments).values({ requestId, body, author }).run();
+  revalidatePath(`/requests/${requestId}`);
 }
