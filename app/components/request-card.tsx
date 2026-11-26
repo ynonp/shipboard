@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { setStatus, upvote } from "@/app/actions";
-import { STATUSES, type FeatureRequest } from "@/db/schema";
+import { type FeatureRequestWithTags, STATUSES } from "@/db/schema";
 import { StatusBadge } from "./status-badge";
 
-export function RequestCard({ request }: { request: FeatureRequest }) {
+export function RequestCard({ request }: { request: FeatureRequestWithTags }) {
   return (
     <article className="flex gap-4 rounded-lg border border-black/10 p-4 dark:border-white/15">
       <form action={upvote}>
@@ -28,6 +28,21 @@ export function RequestCard({ request }: { request: FeatureRequest }) {
           </Link>
           <StatusBadge status={request.status} />
         </div>
+        {request.tags.length > 0 && (
+          <ul className="flex flex-wrap gap-2" aria-label="Request tags">
+            {request.tags.map((tag) => (
+              <li key={tag}>
+                <Link
+                  href={`/?tag=${encodeURIComponent(tag)}`}
+                  aria-label={`Filter requests by ${tag}`}
+                  className="inline-block rounded-full border border-black/15 px-2 py-0.5 text-xs hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/10"
+                >
+                  {tag}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
         {request.description && (
           <p className="text-sm opacity-80">{request.description}</p>
         )}

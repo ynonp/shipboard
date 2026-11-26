@@ -1,5 +1,10 @@
 import { sql } from "drizzle-orm";
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import {
+  integer,
+  primaryKey,
+  sqliteTable,
+  text,
+} from "drizzle-orm/sqlite-core";
 
 export const STATUSES = ["open", "planned", "shipped"] as const;
 export type Status = (typeof STATUSES)[number];
@@ -16,5 +21,24 @@ export const requests = sqliteTable("requests", {
     .default(sql`(unixepoch())`),
 });
 
+export const tags = sqliteTable("tags", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull().unique(),
+});
+
+export const requestTags = sqliteTable(
+  "request_tags",
+  {
+    requestId: integer("request_id")
+      .notNull()
+      .references(() => requests.id, { onDelete: "cascade" }),
+    tagId: integer("tag_id")
+      .notNull()
+      .references(() => tags.id, { onDelete: "cascade" }),
+  },
+  (table) => [primaryKey({ columns: [table.requestId, table.tagId] })],
+);
+
 export type FeatureRequest = typeof requests.$inferSelect;
 export type NewFeatureRequest = typeof requests.$inferInsert;
+export type FeatureRequestWithTags = FeatureRequest & { tags: string[] };

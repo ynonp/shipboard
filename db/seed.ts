@@ -1,5 +1,10 @@
 import { db } from "./index";
-import { requests, type NewFeatureRequest } from "./schema";
+import {
+  requestTags,
+  requests,
+  tags,
+  type NewFeatureRequest,
+} from "./schema";
 
 const daysAgo = (n: number) => new Date(Date.now() - n * 24 * 60 * 60 * 1000);
 
@@ -87,7 +92,9 @@ const seed: NewFeatureRequest[] = [
 ];
 
 db.transaction((tx) => {
+  tx.delete(requestTags).run();
   tx.delete(requests).run();
+  tx.delete(tags).run();
   tx.insert(requests).values(seed).run();
 });
 

@@ -4,7 +4,17 @@ import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
-import { requests, STATUSES, type Status } from "@/db/schema";
+import {
+  requestTags,
+  requests,
+  STATUSES,
+  tags,
+  type Status,
+} from "@/db/schema";
+
+function normalizeTag(value: string) {
+  return value.trim().toLowerCase();
+}
 
 export async function createRequest(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
@@ -12,14 +22,74 @@ export async function createRequest(formData: FormData) {
   const author = String(formData.get("author") ?? "").trim() || "Anonymous";
   if (!title) throw new Error("Title is required");
 
-  const created = db
-    .insert(requests)
-    .values({ title, description, author })
-    .returning({ id: requests.id })
-    .get();
+  let tagNames: string[] = [];
+  const rawTags = formData.get("tags");
+  if (typeof rawTags === "string") {
+    try {
+      const submittedTags: unknown = JSON.parse(rawTags);
+      if (Array.isArray(submittedTags)) {
+        tagNames = [
+          ...new Set(
+            submittedTags
+              .filter((tag): tag is string => typeof tag === "string")
+              .map(normalizeTag)
+              .filter(Boolean),
+          ),
+        ];
+      }
+    } catch {
+      tagNames = [];
+    }
+  }
+
+  const created = db.transaction((tx) => {
+    const request = tx
+      .insert(requests)
+      .values({ title, description, author })
+      .returning({ id: requests.id })
+      .get();
+
+    for (const name of tagNames) {
+      tx.insert(tags).values({ name }).onConflictDoNothing().run();
+      const tag = tx.select({ id: tags.id }).from(tags).where(eq(tags.name, name)).get();
+      if (tag) {
+        tx.insert(requestTags)
+          .values({ requestId: request.id, tagId: tag.id })
+          .onConflictDoNothing()
+          .run();
+      }
+    }
+    return request;
+  });
 
   revalidatePath("/", "layout");
   redirect(`/requests/${created.id}`);
+}
+
+export async function addTag(formData: FormData) {
+  const requestId = Number(formData.get("id"));
+  const name = normalizeTag(String(formData.get("tag") ?? ""));
+  if (!Number.isSafeInteger(requestId) || requestId < 1 || !name) return;
+
+  db.transaction((tx) => {
+    const request = tx
+      .select({ id: requests.id })
+      .from(requests)
+      .where(eq(requests.id, requestId))
+      .get();
+    if (!request) return;
+
+    tx.insert(tags).values({ name }).onConflictDoNothing().run();
+    const tag = tx.select({ id: tags.id }).from(tags).where(eq(tags.name, name)).get();
+    if (tag) {
+      tx.insert(requestTags)
+        .values({ requestId, tagId: tag.id })
+        .onConflictDoNothing()
+        .run();
+    }
+  });
+
+  revalidatePath("/", "layout");
 }
 
 export async function upvote(formData: FormData) {

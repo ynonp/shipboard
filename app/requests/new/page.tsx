@@ -1,4 +1,5 @@
 import { createRequest } from "@/app/actions";
+import { TagsInput } from "@/app/components/tags-input";
 
 const field =
   "w-full rounded-md border border-black/15 bg-transparent px-3 py-2 dark:border-white/20";
@@ -20,6 +21,7 @@ export default function NewRequestPage() {
           <span className="text-sm font-medium">Your name</span>
           <input name="author" className={field} />
         </label>
+        <TagsInput />
         <button
           type="submit"
           className="self-start rounded-md bg-foreground px-4 py-2 text-sm font-medium text-background"
