@@ -108,9 +108,9 @@ and server actions, Tailwind CSS v4 via `@tailwindcss/turbopack`. There is no
 ## How to verify visually
 
 `npm run dev` on a fresh checkout creates and seeds `shipboard.db`
-automatically (the `predev` hook runs `db:push` + `db:seed`). It serves
-`http://localhost:3000`. Use Playwright (localhost-only) to drive it rather than
-reasoning from markup alone.
+automatically (the `predev` hook runs `db:push` + `db:seed`). Follow the
+browser verification steps in `AGENTS.md` before opening Playwright at
+`http://127.0.0.1:3000/`.
 
 For any visible change, check:
 
