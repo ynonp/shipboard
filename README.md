@@ -30,5 +30,7 @@ The DB file defaults to `./shipboard.db`; override it with `DB_FILE_NAME`.
 - `db/seed.ts`: seed data
 - `app/actions.ts`: server actions `createRequest`, `upvote`, `setStatus`
 - `app/components/request-card.tsx`: the request card
+- `app/i18n/*.json`: UI translations for English, Hebrew, French, Russian,
+  Arabic, German, and Spanish. Hebrew and Arabic use right-to-left layout.
 - Pages: `/` (list), `/requests/new`, `/requests/[id]`, `/roadmap`
 - `.github/agents/ui-expert.agent.md`: custom agent profile for UI/UX-focused work

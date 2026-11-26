@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { StatusBadge } from "@/app/components/status-badge";
 import { getRequests } from "@/db/queries";
 import { STATUSES } from "@/db/schema";
+import { TranslatedText } from "@/app/components/translated-text";
 
 async function Columns() {
   const requests = await getRequests();
@@ -39,8 +40,16 @@ async function Columns() {
 export default function RoadmapPage() {
   return (
     <>
-      <h1 className="mb-6 text-2xl font-bold">Roadmap</h1>
-      <Suspense fallback={<p className="opacity-70">Loading roadmap…</p>}>
+      <h1 className="mb-6 text-2xl font-bold">
+        <TranslatedText id="roadmap" />
+      </h1>
+      <Suspense
+        fallback={
+          <p className="opacity-70">
+            <TranslatedText id="loadingRoadmap" />
+          </p>
+        }
+      >
         <Columns />
       </Suspense>
     </>
