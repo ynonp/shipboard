@@ -1,7 +1,7 @@
 # Shipboard
 
-A small team feature-request board: post requests, upvote them, and move them
-through **Open → Planned → Shipped**.
+A small team feature-request board: post requests, comment and upvote, and move
+requests through **Open → Planned → Shipped**.
 
 Next.js 16 (App Router, Cache Components) · Drizzle ORM · SQLite (better-sqlite3)
 
@@ -25,10 +25,10 @@ The DB file defaults to `./shipboard.db`; override it with `DB_FILE_NAME`.
 
 ## Layout
 
-- `db/schema.ts`: the `requests` table
+- `db/schema.ts`: the `requests` and `comments` tables
 - `db/queries.ts`: reads (call `connection()` so they run per request)
 - `db/seed.ts`: seed data
-- `app/actions.ts`: server actions `createRequest`, `upvote`, `setStatus`
+- `app/actions.ts`: server actions `createRequest`, `addComment`, `upvote`, `setStatus`
 - `app/components/request-card.tsx`: the request card
 - Pages: `/` (list), `/requests/new`, `/requests/[id]`, `/roadmap`
 - `.github/agents/ui-expert.agent.md`: custom agent profile for UI/UX-focused work
