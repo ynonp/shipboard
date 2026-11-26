@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "לוח בקשות תכונות לצוות" },
+  "nav": { "requests": "בקשות", "roadmap": "מפת דרכים", "language": "שפה" },
+  "home": {
+    "title": "בקשות תכונות",
+    "newRequest": "בקשה חדשה",
+    "empty": "אין בקשות עדיין. היו הראשונים!",
+    "loading": "טוען בקשות…"
+  },
+  "status": { "open": "פתוחה", "planned": "מתוכננת", "shipped": "נשלחה" },
+  "card": {
+    "upvote": "הצבעה עבור {title}",
+    "by": "מאת {author}",
+    "markAs": "סמן כ{status}"
+  },
+  "detail": { "back": "כל הבקשות →", "loading": "טוען…" },
+  "form": {
+    "title": "בקשת תכונה חדשה",
+    "fieldTitle": "כותרת",
+    "fieldDescription": "תיאור",
+    "fieldAuthor": "השם שלך",
+    "submit": "שליחת בקשה",
+    "anonymous": "אנונימי"
+  },
+  "roadmap": { "title": "מפת דרכים", "loading": "טוען מפת דרכים…" }
+}

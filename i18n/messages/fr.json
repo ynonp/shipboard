@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "Tableau de demandes de fonctionnalités pour l'équipe" },
+  "nav": { "requests": "Demandes", "roadmap": "Feuille de route", "language": "Langue" },
+  "home": {
+    "title": "Demandes de fonctionnalités",
+    "newRequest": "Nouvelle demande",
+    "empty": "Aucune demande pour le moment. Soyez le premier !",
+    "loading": "Chargement des demandes…"
+  },
+  "status": { "open": "ouverte", "planned": "planifiée", "shipped": "livrée" },
+  "card": {
+    "upvote": "Voter pour {title}",
+    "by": "par {author}",
+    "markAs": "Marquer comme {status}"
+  },
+  "detail": { "back": "← Toutes les demandes", "loading": "Chargement…" },
+  "form": {
+    "title": "Nouvelle demande de fonctionnalité",
+    "fieldTitle": "Titre",
+    "fieldDescription": "Description",
+    "fieldAuthor": "Votre nom",
+    "submit": "Envoyer la demande",
+    "anonymous": "Anonyme"
+  },
+  "roadmap": { "title": "Feuille de route", "loading": "Chargement de la feuille de route…" }
+}

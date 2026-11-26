@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "Tablero de solicitudes de funciones del equipo" },
+  "nav": { "requests": "Solicitudes", "roadmap": "Hoja de ruta", "language": "Idioma" },
+  "home": {
+    "title": "Solicitudes de funciones",
+    "newRequest": "Nueva solicitud",
+    "empty": "Aún no hay solicitudes. ¡Sé el primero!",
+    "loading": "Cargando solicitudes…"
+  },
+  "status": { "open": "abierta", "planned": "planificada", "shipped": "entregada" },
+  "card": {
+    "upvote": "Votar por {title}",
+    "by": "por {author}",
+    "markAs": "Marcar como {status}"
+  },
+  "detail": { "back": "← Todas las solicitudes", "loading": "Cargando…" },
+  "form": {
+    "title": "Nueva solicitud de función",
+    "fieldTitle": "Título",
+    "fieldDescription": "Descripción",
+    "fieldAuthor": "Tu nombre",
+    "submit": "Enviar solicitud",
+    "anonymous": "Anónimo"
+  },
+  "roadmap": { "title": "Hoja de ruta", "loading": "Cargando la hoja de ruta…" }
+}

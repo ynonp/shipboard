@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "Feature-Wunschliste für das Team" },
+  "nav": { "requests": "Anfragen", "roadmap": "Roadmap", "language": "Sprache" },
+  "home": {
+    "title": "Feature-Anfragen",
+    "newRequest": "Neue Anfrage",
+    "empty": "Noch keine Anfragen. Sei der Erste!",
+    "loading": "Anfragen werden geladen…"
+  },
+  "status": { "open": "offen", "planned": "geplant", "shipped": "ausgeliefert" },
+  "card": {
+    "upvote": "Für {title} abstimmen",
+    "by": "von {author}",
+    "markAs": "Als {status} markieren"
+  },
+  "detail": { "back": "← Alle Anfragen", "loading": "Wird geladen…" },
+  "form": {
+    "title": "Neue Feature-Anfrage",
+    "fieldTitle": "Titel",
+    "fieldDescription": "Beschreibung",
+    "fieldAuthor": "Dein Name",
+    "submit": "Anfrage senden",
+    "anonymous": "Anonym"
+  },
+  "roadmap": { "title": "Roadmap", "loading": "Roadmap wird geladen…" }
+}

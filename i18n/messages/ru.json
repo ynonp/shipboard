@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "Доска запросов функций для команды" },
+  "nav": { "requests": "Запросы", "roadmap": "Дорожная карта", "language": "Язык" },
+  "home": {
+    "title": "Запросы функций",
+    "newRequest": "Новый запрос",
+    "empty": "Пока нет запросов. Будьте первым!",
+    "loading": "Загрузка запросов…"
+  },
+  "status": { "open": "открыт", "planned": "запланирован", "shipped": "выпущен" },
+  "card": {
+    "upvote": "Проголосовать за «{title}»",
+    "by": "автор: {author}",
+    "markAs": "Отметить: {status}"
+  },
+  "detail": { "back": "← Все запросы", "loading": "Загрузка…" },
+  "form": {
+    "title": "Новый запрос функции",
+    "fieldTitle": "Заголовок",
+    "fieldDescription": "Описание",
+    "fieldAuthor": "Ваше имя",
+    "submit": "Отправить запрос",
+    "anonymous": "Аноним"
+  },
+  "roadmap": { "title": "Дорожная карта", "loading": "Загрузка дорожной карты…" }
+}

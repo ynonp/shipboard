@@ -7,7 +7,7 @@ deadline=$((SECONDS + timeout))
 consecutive=0
 
 while :; do
-  if response=$(curl --silent --show-error --max-time 3 --output /dev/null --write-out '%{http_code}' "$url" 2>&1) && [[ $response == 200 ]]; then
+  if response=$(curl --silent --show-error --location --max-time 3 --output /dev/null --write-out '%{http_code}' "$url" 2>&1) && [[ $response == 200 ]]; then
     consecutive=$((consecutive + 1))
     if (( consecutive == 2 )); then
       printf 'Shipboard is ready at %s\n' "$url"

@@ -32,3 +32,11 @@ The DB file defaults to `./shipboard.db`; override it with `DB_FILE_NAME`.
 - `app/components/request-card.tsx`: the request card
 - Pages: `/` (list), `/requests/new`, `/requests/[id]`, `/roadmap`
 - `.github/agents/ui-expert.agent.md`: custom agent profile for UI/UX-focused work
+
+## Languages
+
+Shipboard supports English, Hebrew, French, Russian, Arabic, German and Spanish.
+The language is the first URL segment (`/en`, `/he`, …); `/` redirects based on
+the browser's `Accept-Language`. Hebrew and Arabic render right-to-left.
+All UI text lives in `i18n/messages/<locale>.json`; to add a language, add a
+JSON file with the same keys, and register it in `i18n/config.ts` and `i18n/index.ts`.

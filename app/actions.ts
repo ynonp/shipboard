@@ -4,12 +4,19 @@ import { eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { db } from "@/db";
+import { hasLocale, DEFAULT_LOCALE } from "@/i18n/config";
+import { getMessages } from "@/i18n";
 import { requests, STATUSES, type Status } from "@/db/schema";
+
+function getLang(formData: FormData) {
+  const lang = String(formData.get("lang") ?? "");
+  return hasLocale(lang) ? lang : DEFAULT_LOCALE;
+}
 
 export async function createRequest(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
-  const author = String(formData.get("author") ?? "").trim() || "Anonymous";
+  const author = String(formData.get("author") ?? "").trim() || getMessages(getLang(formData)).form.anonymous;
   if (!title) throw new Error("Title is required");
 
   const created = db
@@ -19,7 +26,7 @@ export async function createRequest(formData: FormData) {
     .get();
 
   revalidatePath("/", "layout");
-  redirect(`/requests/${created.id}`);
+  redirect(`/${getLang(formData)}/requests/${created.id}`);
 }
 
 export async function upvote(formData: FormData) {

@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "Team feature-request board" },
+  "nav": { "requests": "Requests", "roadmap": "Roadmap", "language": "Language" },
+  "home": {
+    "title": "Feature requests",
+    "newRequest": "New request",
+    "empty": "No requests yet. Be the first!",
+    "loading": "Loading requests…"
+  },
+  "status": { "open": "open", "planned": "planned", "shipped": "shipped" },
+  "card": {
+    "upvote": "Upvote {title}",
+    "by": "by {author}",
+    "markAs": "Mark {status}"
+  },
+  "detail": { "back": "← All requests", "loading": "Loading…" },
+  "form": {
+    "title": "New feature request",
+    "fieldTitle": "Title",
+    "fieldDescription": "Description",
+    "fieldAuthor": "Your name",
+    "submit": "Submit request",
+    "anonymous": "Anonymous"
+  },
+  "roadmap": { "title": "Roadmap", "loading": "Loading roadmap…" }
+}

@@ -1,0 +1,26 @@
+{
+  "meta": { "title": "Shipboard", "description": "لوحة طلبات الميزات للفريق" },
+  "nav": { "requests": "الطلبات", "roadmap": "خارطة الطريق", "language": "اللغة" },
+  "home": {
+    "title": "طلبات الميزات",
+    "newRequest": "طلب جديد",
+    "empty": "لا توجد طلبات بعد. كن الأول!",
+    "loading": "جارٍ تحميل الطلبات…"
+  },
+  "status": { "open": "مفتوح", "planned": "مخطط", "shipped": "تم الإصدار" },
+  "card": {
+    "upvote": "التصويت لـ {title}",
+    "by": "بواسطة {author}",
+    "markAs": "تعيين كـ {status}"
+  },
+  "detail": { "back": "كل الطلبات →", "loading": "جارٍ التحميل…" },
+  "form": {
+    "title": "طلب ميزة جديدة",
+    "fieldTitle": "العنوان",
+    "fieldDescription": "الوصف",
+    "fieldAuthor": "اسمك",
+    "submit": "إرسال الطلب",
+    "anonymous": "مجهول"
+  },
+  "roadmap": { "title": "خارطة الطريق", "loading": "جارٍ تحميل خارطة الطريق…" }
+}
